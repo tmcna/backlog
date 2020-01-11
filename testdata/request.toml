@@ -1,0 +1,16 @@
+projectKey     = "TESTTOOL"
+summary        = "課題登録のテスト(TOML)"
+
+description    = """
+課題の詳細 1行目
+2行目
+3行目
+4行目
+複数行を入力します。"""
+
+#asignee        = "タマコナ"
+startDate      = "2020-01-01"
+dueDate        = "2020-02-01"
+estimatedHours = "8"
+issueType      = "タスク"
+priority       = "高"
