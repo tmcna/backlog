@@ -1,2 +1,3 @@
 .DS_STORE
 go.sum
+./cmd/backlogcli/backlogcli 

@@ -7,7 +7,8 @@ import (
 
 	"github.com/BurntSushi/toml"
 	"github.com/tealeg/xlsx"
-	"github.com/tmcna/backlogcli/pkg/client"
+
+	"github.com/tmcna/backlog/pkg/client"
 )
 
 // Subcommand struct
