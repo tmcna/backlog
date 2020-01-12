@@ -33,7 +33,8 @@ func (t *Status) Request(key string, value string) {
 
 // List function returns list of statuses.
 func (t *Status) List() ([]StatusResponse, error) {
-	api := "api/v2/projects/" + t.projectKey + "/statuses"
+	api := fmt.Sprintf("api/v2/projects/%s/statuses", t.projectKey)
+
 	cli := NewClient(t.space, t.apiKey)
 	body, err := cli.Get(api, nil)
 	if err != nil {
@@ -51,8 +52,7 @@ func (t *Status) List() ([]StatusResponse, error) {
 
 // Add function adds new Status to the project.
 func (t *Status) Add() (*StatusResponse, error) {
-
-	api := "api/v2/projects/" + t.projectKey + "/statuses"
+	api := fmt.Sprintf("api/v2/projects/%s/statuses", t.projectKey)
 
 	cli := NewClient(t.space, t.apiKey)
 	body, err := cli.Post(api, t.request)
@@ -70,8 +70,8 @@ func (t *Status) Add() (*StatusResponse, error) {
 
 // Delete function deletes status.
 func (t *Status) Delete(statusID int, substituteStatusID int) (*StatusResponse, error) {
+	api := fmt.Sprintf("api/v2/projects/%s/statuses/%s", t.projectKey, strconv.Itoa(statusID))
 
-	api := "api/v2/projects/" + t.projectKey + "/statuses/" + strconv.Itoa(statusID)
 	values := url.Values{}
 	values.Set("substituteStatusId", strconv.Itoa(substituteStatusID))
 	cli := NewClient(t.space, t.apiKey)
@@ -91,7 +91,8 @@ func (t *Status) Delete(statusID int, substituteStatusID int) (*StatusResponse, 
 
 // GetID function gets id from Status name.
 func (t *Status) GetID(name string) (int, error) {
-	api := "api/v2/projects/" + t.projectKey + "/statuses"
+	api := fmt.Sprintf("api/v2/projects/%s/statuses", t.projectKey)
+
 	cli := NewClient(t.space, t.apiKey)
 	body, err := cli.Get(api, nil)
 	if err != nil {

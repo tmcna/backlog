@@ -44,7 +44,7 @@ func (u *User) List() ([]UserResponse, error) {
 
 // ListOfProject function returns list of project members.
 func (u *User) ListOfProject(projectKey string) ([]UserResponse, error) {
-	api := "api/v2/projects/" + projectKey + "/users"
+	api := fmt.Sprintf("api/v2/projects/%s/users", projectKey)
 
 	cli := NewClient(u.space, u.apiKey)
 	body, err := cli.Get(api, nil)

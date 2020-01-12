@@ -33,7 +33,8 @@ func (m *Milestone) Request(key string, value string) {
 
 // List function returns list of Versions/Milestones in the project.
 func (m *Milestone) List() ([]MilestoneResponse, error) {
-	api := "api/v2/projects/" + m.projectKey + "/versions"
+	api := fmt.Sprintf("api/v2/projects/%s/versions", m.projectKey)
+	
 	cli := NewClient(m.space, m.apiKey)
 	body, err := cli.Get(api, nil)
 	if err != nil {
@@ -51,8 +52,8 @@ func (m *Milestone) List() ([]MilestoneResponse, error) {
 
 // Add function adds new Version/Milestone to the project.
 func (m *Milestone) Add() (*MilestoneResponse, error) {
+	api := fmt.Sprintf("api/v2/projects/%s/versions", m.projectKey)
 
-	api := "api/v2/projects/" + m.projectKey + "/versions"
 	cli := NewClient(m.space, m.apiKey)
 	body, err := cli.Post(api, m.request)
 	if err != nil {
@@ -70,8 +71,7 @@ func (m *Milestone) Add() (*MilestoneResponse, error) {
 
 // Delete function deletes Milestone.
 func (m *Milestone) Delete(id int) (*MilestoneResponse, error) {
-
-	api := "api/v2/projects/" + m.projectKey + "/versions/" + strconv.Itoa(id)
+	api := fmt.Sprintf("api/v2/projects/%s/versions/%s", m.projectKey, strconv.Itoa(id))
 
 	cli := NewClient(m.space, m.apiKey)
 	body, err := cli.Delete(api, nil)
@@ -90,7 +90,8 @@ func (m *Milestone) Delete(id int) (*MilestoneResponse, error) {
 
 // GetID function gets id from Version/Milestone name.
 func (m *Milestone) GetID(projectKey string, name string) (int, error) {
-	api := "api/v2/projects/" + projectKey + "/versions"
+	api := fmt.Sprintf("api/v2/projects/%s/versions", projectKey)
+
 	cli := NewClient(m.space, m.apiKey)
 	body, err := cli.Get(api, nil)
 	if err != nil {

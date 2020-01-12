@@ -33,7 +33,8 @@ func (c *Category) Request(key string, value string) {
 
 // List function returns list of Categories in the project.
 func (c *Category) List() ([]CategoryResponse, error) {
-	api := "api/v2/projects/" + c.projectKey + "/categories"
+	api := fmt.Sprintf("api/v2/projects/%s/categories", c.projectKey)
+	
 	cli := NewClient(c.space, c.apiKey)
 	body, err := cli.Get(api, nil)
 	if err != nil {

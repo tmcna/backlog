@@ -137,7 +137,7 @@ func (t *Issue) HasNext() bool {
 
 // Info function returns information about issue.
 func (t *Issue) Info(issueKey string) (*IssueResponse, error) {
-	api := "api/v2/issues/" + issueKey
+	api := fmt.Sprintf("api/v2/issues/%s", issueKey)
 
 	cli := NewClient(t.space, t.apiKey)
 	body, err := cli.Get(api, nil)
@@ -174,7 +174,7 @@ func (t *Issue) Add(q *IssueRequest) (*IssueResponse, error) {
 
 // Update function adds new issue.
 func (t *Issue) Update(q *IssueRequest, issueKey string) (*IssueResponse, error) {
-	api := "api/v2/issues/" + issueKey
+	api := fmt.Sprintf("api/v2/issues/%s", issueKey)
 
 	cli := NewClient(t.space, t.apiKey)
 	body, err := cli.Patch(api, q.values)

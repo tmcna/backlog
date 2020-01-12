@@ -20,19 +20,19 @@ func NewCommentRequest() *CommentRequest {
 	return q
 }
 
-// Content is ...
+// Content sets request parameter value.
 func (q *CommentRequest) Content(value string) {
 	q.values.Set("content", value)
 }
 
-// Comment is ...
+// Comment is a structure for Comment APIs.
 type Comment struct {
 	space    string
 	apiKey   string
 	issueKey string
 }
 
-// NewComment is ...
+// NewComment is constructor for Comment APIs.
 func NewComment(space string, apiKey string, issueKey string) *Comment {
 	comment := new(Comment)
 	comment.space = space
