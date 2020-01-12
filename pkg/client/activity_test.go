@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestActivities(t *testing.T) {
+func TestActivity_List(t *testing.T) {
 
 	cfg, err := NewConfig()
 	if err != nil {

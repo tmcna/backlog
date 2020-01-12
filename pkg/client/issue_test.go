@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func TestIssueListQuery(t *testing.T) {
+func TestIssue_ListQuery(t *testing.T) {
 
 	cfg, err := NewConfig()
 	if err != nil {
@@ -14,9 +14,9 @@ func TestIssueListQuery(t *testing.T) {
 	}
 	space, apiKey := cfg.Setup()
 
-	issueType := NewIssueType(space, apiKey)
-	taskID, err := issueType.GetID("TESTTOOL", "タスク")  //種別名から種別IDを求める
-	otherID, err := issueType.GetID("TESTTOOL", "その他") //種別名から種別IDを求める
+	issueType := NewIssueType(space, apiKey, "TESTTOOL")
+	taskID, err := issueType.GetID("タスク")  //種別名から種別IDを求める
+	otherID, err := issueType.GetID("その他") //種別名から種別IDを求める
 
 	issue := NewIssue(space, apiKey)
 	issue.Query("issueTypeId[]", strconv.Itoa(taskID))
@@ -25,7 +25,7 @@ func TestIssueListQuery(t *testing.T) {
 	issue.PrintCSV(r)
 }
 
-func TestIssueList(t *testing.T) {
+func TestIssue_List(t *testing.T) {
 
 	cfg, err := NewConfig()
 	if err != nil {
@@ -43,7 +43,7 @@ func TestIssueList(t *testing.T) {
 	}
 }
 
-func TestIssueInfo(t *testing.T) {
+func TestIssue_Info(t *testing.T) {
 
 	cfg, err := NewConfig()
 	if err != nil {
@@ -59,7 +59,7 @@ func TestIssueInfo(t *testing.T) {
 	issue.PrintIssueCSV(r)
 }
 
-func TestIssueAddDelete(t *testing.T) {
+func TestIssue_AddDelete(t *testing.T) {
 
 	cfg, err := NewConfig()
 	if err != nil {

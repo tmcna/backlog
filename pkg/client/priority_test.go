@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestPriorityList(t *testing.T) {
+func TestPriority_List(t *testing.T) {
 
 	cfg, err := NewConfig()
 	if err != nil {
@@ -18,7 +18,7 @@ func TestPriorityList(t *testing.T) {
 	c.PrintCSV(r)
 }
 
-func TestPriorityGetID(t *testing.T) {
+func TestPriority_GetID(t *testing.T) {
 
 	cfg, err := NewConfig()
 	if err != nil {

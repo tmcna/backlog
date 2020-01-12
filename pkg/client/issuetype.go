@@ -9,16 +9,18 @@ import (
 
 // IssueType is ...
 type IssueType struct {
-	space   string
-	apiKey  string
-	request url.Values
+	space      string
+	apiKey     string
+	projectKey string
+	request    url.Values
 }
 
 // NewIssueType is constructor.
-func NewIssueType(space string, apiKey string) *IssueType {
+func NewIssueType(space string, apiKey string, projectKey string) *IssueType {
 	t := new(IssueType)
 	t.space = space
 	t.apiKey = apiKey
+	t.projectKey = projectKey
 	t.request = url.Values{}
 
 	return t
@@ -30,8 +32,8 @@ func (t *IssueType) Request(key string, value string) {
 }
 
 // List function returns list of Issue Types in the project.
-func (t *IssueType) List(projectKey string) ([]IssueTypeResponse, error) {
-	api := "api/v2/projects/" + projectKey + "/issueTypes"
+func (t *IssueType) List() ([]IssueTypeResponse, error) {
+	api := "api/v2/projects/" + t.projectKey + "/issueTypes"
 	cli := NewClient(t.space, t.apiKey)
 	body, err := cli.Get(api, nil)
 	if err != nil {
@@ -48,9 +50,9 @@ func (t *IssueType) List(projectKey string) ([]IssueTypeResponse, error) {
 }
 
 // Add function adds new Issue Type to the project.
-func (t *IssueType) Add(projectKey string) (*IssueTypeResponse, error) {
+func (t *IssueType) Add() (*IssueTypeResponse, error) {
 
-	api := "api/v2/projects/" + projectKey + "/issueTypes"
+	api := "api/v2/projects/" + t.projectKey + "/issueTypes"
 
 	cli := NewClient(t.space, t.apiKey)
 	body, err := cli.Post(api, t.request)
@@ -67,9 +69,9 @@ func (t *IssueType) Add(projectKey string) (*IssueTypeResponse, error) {
 }
 
 // Delete function deletes Issue Type.
-func (t *IssueType) Delete(projectKey string, issueTypeID int, substituteIssueTypeID int) (*IssueTypeResponse, error) {
+func (t *IssueType) Delete(issueTypeID int, substituteIssueTypeID int) (*IssueTypeResponse, error) {
 
-	api := "api/v2/projects/" + projectKey + "/issueTypes/" + strconv.Itoa(issueTypeID)
+	api := "api/v2/projects/" + t.projectKey + "/issueTypes/" + strconv.Itoa(issueTypeID)
 	values := url.Values{}
 	values.Set("substituteIssueTypeId", strconv.Itoa(substituteIssueTypeID))
 	cli := NewClient(t.space, t.apiKey)
@@ -88,8 +90,8 @@ func (t *IssueType) Delete(projectKey string, issueTypeID int, substituteIssueTy
 }
 
 // GetID function gets id from Issue Type name.
-func (t *IssueType) GetID(projectKey string, name string) (int, error) {
-	api := "api/v2/projects/" + projectKey + "/issueTypes"
+func (t *IssueType) GetID(name string) (int, error) {
+	api := "api/v2/projects/" + t.projectKey + "/issueTypes"
 	cli := NewClient(t.space, t.apiKey)
 	body, err := cli.Get(api, nil)
 	if err != nil {

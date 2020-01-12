@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestNotificationList(t *testing.T) {
+func TestNotification_List(t *testing.T) {
 
 	cfg, err := NewConfig()
 	if err != nil {

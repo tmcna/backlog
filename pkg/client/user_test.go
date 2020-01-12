@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestUserList(t *testing.T) {
+func TestUser_List(t *testing.T) {
 
 	cfg, err := NewConfig()
 	if err != nil {
@@ -17,7 +17,7 @@ func TestUserList(t *testing.T) {
 	user.PrintCSV(r)
 }
 
-func TestUserListOfProject(t *testing.T) {
+func TestUser_ListOfProject(t *testing.T) {
 
 	cfg, err := NewConfig()
 	if err != nil {

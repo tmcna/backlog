@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestSpaceActivities(t *testing.T) {
+func TestSpace_GetActivities(t *testing.T) {
 
 	cfg, err := NewConfig()
 	if err != nil {
@@ -29,7 +29,7 @@ func TestSpaceActivities(t *testing.T) {
 	}
 }
 
-func TestSpaceIssues(t *testing.T) {
+func TestSpace_GetIssues(t *testing.T) {
 
 	cfg, err := NewConfig()
 	if err != nil {
@@ -48,7 +48,7 @@ func TestSpaceIssues(t *testing.T) {
 	}
 }
 
-func TestSpaceUsage(t *testing.T) {
+func TestSpace_Usage(t *testing.T) {
 
 	cfg, err := NewConfig()
 	if err != nil {

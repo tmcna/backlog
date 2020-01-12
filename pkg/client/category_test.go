@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestCategoryList(t *testing.T) {
+func TestCategory_List(t *testing.T) {
 
 	cfg, err := NewConfig()
 	if err != nil {
@@ -22,7 +22,7 @@ func TestCategoryList(t *testing.T) {
 	c.PrintCSV(r)
 }
 
-func TestCategoryAddDelete(t *testing.T) {
+func TestCategory_AddDelete(t *testing.T) {
 
 	cfg, err := NewConfig()
 	if err != nil {
@@ -42,7 +42,7 @@ func TestCategoryAddDelete(t *testing.T) {
 	}
 }
 
-func TestCategoryGetID(t *testing.T) {
+func TestCategory_GetID(t *testing.T) {
 
 	cfg, err := NewConfig()
 	if err != nil {

@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestCommentList(t *testing.T) {
+func TestComment_List(t *testing.T) {
 
 	cfg, err := NewConfig()
 	if err != nil {
@@ -18,7 +18,7 @@ func TestCommentList(t *testing.T) {
 	comment.PrintCSV(r)
 }
 
-func TestCommentAddDelete(t *testing.T) {
+func TestComment_AddDelete(t *testing.T) {
 
 	cfg, err := NewConfig()
 	if err != nil {
@@ -45,7 +45,7 @@ func TestCommentAddDelete(t *testing.T) {
 
 }
 
-func TestCommentUpdate(t *testing.T) {
+func TestComment_Update(t *testing.T) {
 
 	cfg, err := NewConfig()
 	if err != nil {

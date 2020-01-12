@@ -9,16 +9,18 @@ import (
 
 // Status is ...
 type Status struct {
-	space   string
-	apiKey  string
-	request url.Values
+	space      string
+	apiKey     string
+	projectKey string
+	request    url.Values
 }
 
 // NewStatus is constructor.
-func NewStatus(space string, apiKey string) *Status {
+func NewStatus(space string, apiKey string, projectKey string) *Status {
 	t := new(Status)
 	t.space = space
 	t.apiKey = apiKey
+	t.projectKey = projectKey
 	t.request = url.Values{}
 
 	return t
@@ -30,8 +32,8 @@ func (t *Status) Request(key string, value string) {
 }
 
 // List function returns list of statuses.
-func (t *Status) List(projectKey string) ([]StatusResponse, error) {
-	api := "api/v2/projects/" + projectKey + "/statuses"
+func (t *Status) List() ([]StatusResponse, error) {
+	api := "api/v2/projects/" + t.projectKey + "/statuses"
 	cli := NewClient(t.space, t.apiKey)
 	body, err := cli.Get(api, nil)
 	if err != nil {
@@ -48,9 +50,9 @@ func (t *Status) List(projectKey string) ([]StatusResponse, error) {
 }
 
 // Add function adds new Status to the project.
-func (t *Status) Add(projectKey string) (*StatusResponse, error) {
+func (t *Status) Add() (*StatusResponse, error) {
 
-	api := "api/v2/projects/" + projectKey + "/statuses"
+	api := "api/v2/projects/" + t.projectKey + "/statuses"
 
 	cli := NewClient(t.space, t.apiKey)
 	body, err := cli.Post(api, t.request)
@@ -67,9 +69,9 @@ func (t *Status) Add(projectKey string) (*StatusResponse, error) {
 }
 
 // Delete function deletes status.
-func (t *Status) Delete(projectKey string, statusID int, substituteStatusID int) (*StatusResponse, error) {
+func (t *Status) Delete(statusID int, substituteStatusID int) (*StatusResponse, error) {
 
-	api := "api/v2/projects/" + projectKey + "/statuses/" + strconv.Itoa(statusID)
+	api := "api/v2/projects/" + t.projectKey + "/statuses/" + strconv.Itoa(statusID)
 	values := url.Values{}
 	values.Set("substituteStatusId", strconv.Itoa(substituteStatusID))
 	cli := NewClient(t.space, t.apiKey)
@@ -88,8 +90,8 @@ func (t *Status) Delete(projectKey string, statusID int, substituteStatusID int)
 }
 
 // GetID function gets id from Status name.
-func (t *Status) GetID(projectKey string, name string) (int, error) {
-	api := "api/v2/projects/" + projectKey + "/statuses"
+func (t *Status) GetID(name string) (int, error) {
+	api := "api/v2/projects/" + t.projectKey + "/statuses"
 	cli := NewClient(t.space, t.apiKey)
 	body, err := cli.Get(api, nil)
 	if err != nil {

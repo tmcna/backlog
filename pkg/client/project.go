@@ -128,8 +128,8 @@ func (p *Project) Reset() error {
 	}
 
 	// get issue type in the project.
-	issueType := NewIssueType(p.space, p.apiKey)
-	p.issueType, err = issueType.List(p.projectKey)
+	issueType := NewIssueType(p.space, p.apiKey, p.projectKey)
+	p.issueType, err = issueType.List()
 	if err != nil {
 		return err
 	}
@@ -163,8 +163,8 @@ func (p *Project) Reset() error {
 	}
 
 	// get statuses in the project.
-	status := NewStatus(p.space, p.apiKey)
-	p.status, err = status.List(p.projectKey)
+	status := NewStatus(p.space, p.apiKey, p.projectKey)
+	p.status, err = status.List()
 	if err != nil {
 		return err
 	}

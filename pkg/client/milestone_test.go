@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestMilestoneList(t *testing.T) {
+func TestMilestone_List(t *testing.T) {
 
 	cfg, err := NewConfig()
 	if err != nil {
@@ -21,7 +21,7 @@ func TestMilestoneList(t *testing.T) {
 	m.PrintCSV(r)
 }
 
-func TestMilestoneAddDelete(t *testing.T) {
+func TestMilestone_AddDelete(t *testing.T) {
 
 	cfg, err := NewConfig()
 	if err != nil {
@@ -48,7 +48,7 @@ func TestMilestoneAddDelete(t *testing.T) {
 	}
 }
 
-func TestMilestoneGetID(t *testing.T) {
+func TestMilestone_GetID(t *testing.T) {
 
 	cfg, err := NewConfig()
 	if err != nil {
