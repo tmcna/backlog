@@ -11,9 +11,8 @@ func TestProjects(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	space, apiKey := cfg.Setup()
 
-	p := NewProjects(space, apiKey)
+	p := NewProjects(cfg.Space, cfg.APIKey)
 	r, err := p.List()
 	if err != nil {
 		t.Fatal(err)
@@ -26,9 +25,8 @@ func TestProject(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	space, apiKey := cfg.Setup()
 
-	p, err := NewProject(space, apiKey, "TESTTOOL")
+	p, err := NewProject(cfg.Space, cfg.APIKey, "TESTTOOL")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -40,9 +38,8 @@ func TestProjectIssueTypeID(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	space, apiKey := cfg.Setup()
 
-	p, err := NewProject(space, apiKey, "TESTTOOL")
+	p, err := NewProject(cfg.Space, cfg.APIKey, "TESTTOOL")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -55,9 +52,8 @@ func TestProjectPriorityID(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	space, apiKey := cfg.Setup()
 
-	p, err := NewProject(space, apiKey, "TESTTOOL")
+	p, err := NewProject(cfg.Space, cfg.APIKey, "TESTTOOL")
 	if err != nil {
 		t.Fatal(err)
 	}

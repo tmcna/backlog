@@ -10,9 +10,8 @@ func TestSpace_GetActivities(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	space, apiKey := cfg.Setup()
 
-	s := NewSpace(space, apiKey)
+	s := NewSpace(cfg.Space, cfg.APIKey)
 	p, err := s.GetProject("TESTTOOL")
 	if err != nil {
 		t.Fatal(err)
@@ -35,9 +34,8 @@ func TestSpace_GetIssues(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	space, apiKey := cfg.Setup()
 
-	s := NewSpace(space, apiKey)
+	s := NewSpace(cfg.Space, cfg.APIKey)
 	i := s.GetIssues()
 	for i.HasNext() {
 		r, err := i.List()
@@ -54,9 +52,8 @@ func TestSpace_Usage(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	space, apiKey := cfg.Setup()
 
-	s := NewSpace(space, apiKey)
+	s := NewSpace(cfg.Space, cfg.APIKey)
 	r, err := s.GetSpaceUsage()
 	if err != nil {
 		t.Fatal(err)

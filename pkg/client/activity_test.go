@@ -10,9 +10,8 @@ func TestActivity_List(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	space, apiKey := cfg.Setup()
 
-	act := NewActivity(space, apiKey, 50, DisplayOrderAsc)
+	act := NewActivity(cfg.Space, cfg.APIKey, 50, DisplayOrderAsc)
 
 	for act.HasNext() {
 		r, err := act.List()

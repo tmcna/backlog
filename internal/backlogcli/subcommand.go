@@ -11,26 +11,15 @@ import (
 	"github.com/tmcna/backlog/pkg/client"
 )
 
-// Subcommand struct
-type Subcommand struct {
-	space  string
-	apiKey string
-}
+// UserList function user list subcommand.
+func UserList() error {
 
-// NewSubcommand is a constructor.
-func NewSubcommand() *Subcommand {
-	s := new(Subcommand)
 	cfg, err := client.NewConfig()
 	if err != nil {
 		return nil
 	}
-	s.space, s.apiKey = cfg.Setup()
-	return s
-}
 
-// UserList function user list subcommand.
-func (s *Subcommand) UserList() error {
-	user := client.NewUser(s.space, s.apiKey)
+	user := client.NewUser(cfg.Space, cfg.APIKey)
 	r, err := user.List()
 	if err != nil {
 		return err
@@ -40,8 +29,13 @@ func (s *Subcommand) UserList() error {
 }
 
 // IssueList function issue list subcommand.
-func (s *Subcommand) IssueList() error {
-	issue := client.NewIssue(s.space, s.apiKey)
+func IssueList() error {
+	cfg, err := client.NewConfig()
+	if err != nil {
+		return nil
+	}
+	
+	issue := client.NewIssue(cfg.Space, cfg.APIKey)
 	for issue.HasNext() {
 		r, err := issue.List()
 		if err != nil {
@@ -66,7 +60,7 @@ type IssueAddRequest struct {
 }
 
 // IssueAdd function issue add subcommand.
-func (s *Subcommand) IssueAdd(path string) error {
+func IssueAdd(path string) error {
 
 	e := filepath.Ext(path)
 
@@ -119,9 +113,8 @@ func (s *Subcommand) IssueAdd(path string) error {
 	if err != nil {
 		return err
 	}
-	space, apiKey := cfg.Setup()
 
-	sp := client.NewSpace(space, apiKey)
+	sp := client.NewSpace(cfg.Space, cfg.APIKey)
 	p, err := sp.GetProject(q.ProjectKey)
 	if err != nil {
 		return err
@@ -146,7 +139,7 @@ func (s *Subcommand) IssueAdd(path string) error {
 	if q.EstimatedHours != "" {
 		request.EstimatedHours(q.EstimatedHours)
 	}
-	issue := client.NewIssue(space, apiKey)
+	issue := client.NewIssue(cfg.Space, cfg.APIKey)
 	r, err := issue.Add(request)
 	if err != nil {
 		return err
@@ -173,7 +166,7 @@ type IssueUpdateRequest struct {
 }
 
 // IssueUpdate function issue update subcommand.
-func (s *Subcommand) IssueUpdate(optFile string, optStatus string, optAssignee string, optComment string, issueKey string) error {
+func IssueUpdate(optFile string, optStatus string, optAssignee string, optComment string, issueKey string) error {
 
 	var q IssueUpdateRequest
 
@@ -215,16 +208,15 @@ func (s *Subcommand) IssueUpdate(optFile string, optStatus string, optAssignee s
 	if err != nil {
 		return err
 	}
-	space, apiKey := cfg.Setup()
 
-	i2 := client.NewIssue(space, apiKey)
+	i2 := client.NewIssue(cfg.Space, cfg.APIKey)
 	r2, err := i2.Info(issueKey)
 	if err != nil {
 		return err
 	}
 	projectID := r2.ProjectID
 
-	ps := client.NewProjects(space, apiKey)
+	ps := client.NewProjects(cfg.Space, cfg.APIKey)
 	pr, err := ps.List()
 	if err != nil {
 		return err
@@ -236,7 +228,7 @@ func (s *Subcommand) IssueUpdate(optFile string, optStatus string, optAssignee s
 		}
 	}
 
-	sp := client.NewSpace(space, apiKey)
+	sp := client.NewSpace(cfg.Space, cfg.APIKey)
 	p, err := sp.GetProject(projectKey)
 	if err != nil {
 		return err
@@ -287,7 +279,7 @@ func (s *Subcommand) IssueUpdate(optFile string, optStatus string, optAssignee s
 	}
 
 	// Issueオブジェクトを作成し、リクエストパラメーターを設定する。
-	issue := client.NewIssue(space, apiKey)
+	issue := client.NewIssue(cfg.Space, cfg.APIKey)
 	r, err := issue.Update(request, issueKey)
 	if err != nil {
 		return err
@@ -299,19 +291,18 @@ func (s *Subcommand) IssueUpdate(optFile string, optStatus string, optAssignee s
 }
 
 // CommentAdd function comment add subcommand.
-func (s *Subcommand) CommentAdd(issueKey string, content string) error {
+func CommentAdd(issueKey string, content string) error {
 	cfg, err := client.NewConfig()
 	if err != nil {
 		return err
 	}
-	space, apiKey := cfg.Setup()
 
 	// Create request parameters for Backlog API.
 	q := client.NewCommentRequest()
 	q.Content(content)
 
 	// Commentオブジェクトを作成し、リクエストパラメーターを設定する。
-	comment := client.NewComment(space, apiKey, issueKey)
+	comment := client.NewComment(cfg.Space, cfg.APIKey, issueKey)
 	_, err = comment.Add(q)
 	if err != nil {
 		return err
@@ -321,12 +312,17 @@ func (s *Subcommand) CommentAdd(issueKey string, content string) error {
 }
 
 // IssueDelete function issue delete subcommand.
-func (s *Subcommand) IssueDelete(issueKey string) error {
+func IssueDelete(issueKey string) error {
+	cfg, err := client.NewConfig()
+	if err != nil {
+		return nil
+	}
+	
 	if issueKey == "" {
 		return fmt.Errorf("Error: %s", "Issue key is not found.")
 	}
-	issue := client.NewIssue(s.space, s.apiKey)
-	_, err := issue.Delete(issueKey)
+	issue := client.NewIssue(cfg.Space, cfg.APIKey)
+	_, err = issue.Delete(issueKey)
 	if err != nil {
 		return err
 	}
@@ -334,8 +330,13 @@ func (s *Subcommand) IssueDelete(issueKey string) error {
 }
 
 // ActivityList function executes act subcommand.
-func (s *Subcommand) ActivityList() error {
-	act := client.NewActivity(s.space, s.apiKey, 32, client.DisplayOrderDesc)
+func ActivityList() error {
+	cfg, err := client.NewConfig()
+	if err != nil {
+		return nil
+	}
+
+	act := client.NewActivity(cfg.Space, cfg.APIKey, 32, client.DisplayOrderDesc)
 	for act.HasNext() {
 		r, err := act.List()
 		if err != nil {
@@ -347,8 +348,12 @@ func (s *Subcommand) ActivityList() error {
 }
 
 // NotifyList function executes notify subcommand.
-func (s *Subcommand) NotifyList() error {
-	n := client.NewNotification(s.space, s.apiKey)
+func NotifyList() error {
+	cfg, err := client.NewConfig()
+	if err != nil {
+		return nil
+	}
+	n := client.NewNotification(cfg.Space, cfg.APIKey)
 	r, err := n.List()
 	if err != nil {
 		return err
@@ -358,8 +363,12 @@ func (s *Subcommand) NotifyList() error {
 }
 
 // ProjectList function executes project list subcommand.
-func (s *Subcommand) ProjectList() error {
-	p := client.NewProjects(s.space, s.apiKey)
+func ProjectList() error {
+	cfg, err := client.NewConfig()
+	if err != nil {
+		return nil
+	}
+	p := client.NewProjects(cfg.Space, cfg.APIKey)
 	r, err := p.List()
 	if err != nil {
 		return err
@@ -369,8 +378,12 @@ func (s *Subcommand) ProjectList() error {
 }
 
 // ProjectInfo function executes project info subcommand.
-func (s *Subcommand) ProjectInfo(projectKey string) error {
-	p, err := client.NewProject(s.space, s.apiKey, projectKey)
+func ProjectInfo(projectKey string) error {
+	cfg, err := client.NewConfig()
+	if err != nil {
+		return nil
+	}
+	p, err := client.NewProject(cfg.Space, cfg.APIKey, projectKey)
 	if err != nil {
 		return err
 	}
@@ -379,8 +392,12 @@ func (s *Subcommand) ProjectInfo(projectKey string) error {
 }
 
 // SpaceUsage function executes space subcommand.
-func (s *Subcommand) SpaceUsage() error {
-	sp := client.NewSpace(s.space, s.apiKey)
+func SpaceUsage() error {
+	cfg, err := client.NewConfig()
+	if err != nil {
+		return nil
+	}
+	sp := client.NewSpace(cfg.Space, cfg.APIKey)
 	r, err := sp.GetSpaceUsage()
 	if err != nil {
 		return err

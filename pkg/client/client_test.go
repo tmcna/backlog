@@ -11,11 +11,10 @@ func TestClient(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	space, apiKey := cfg.Setup()
 
 	api := "api/v2" //Error
 
-	cli := NewClient(space, apiKey)
+	cli := NewClient(cfg.Space, cfg.APIKey)
 	_, err = cli.Get(api, nil)
 	if err == nil {
 		t.Fatal(err)

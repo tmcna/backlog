@@ -11,9 +11,8 @@ func TestPriority_List(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	space, apiKey := cfg.Setup()
 
-	c := NewPriority(space, apiKey)
+	c := NewPriority(cfg.Space, cfg.APIKey)
 	r, err := c.List()
 	c.PrintCSV(r)
 }
@@ -24,9 +23,8 @@ func TestPriority_GetID(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	space, apiKey := cfg.Setup()
 
-	c := NewPriority(space, apiKey)
+	c := NewPriority(cfg.Space, cfg.APIKey)
 	r, err := c.List()
 	if err != nil {
 		t.Fatal(err)

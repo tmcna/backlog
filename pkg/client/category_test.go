@@ -11,10 +11,9 @@ func TestCategory_List(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	space, apiKey := cfg.Setup()
 
 	projectKey := "TESTTOOL"
-	c := NewCategory(space, apiKey, projectKey)
+	c := NewCategory(cfg.Space, cfg.APIKey, projectKey)
 	r, err := c.List()
 	if err != nil {
 		t.Fatal(err)
@@ -28,9 +27,8 @@ func TestCategory_AddDelete(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	space, apiKey := cfg.Setup()
 
-	c := NewCategory(space, apiKey, "TESTTOOL")
+	c := NewCategory(cfg.Space, cfg.APIKey, "TESTTOOL")
 	c.Request("name", "テストカテゴリー")
 	r, err := c.Add()
 	if err != nil {
@@ -48,9 +46,8 @@ func TestCategory_GetID(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	space, apiKey := cfg.Setup()
 
-	c := NewCategory(space, apiKey, "TESTTOOL")
+	c := NewCategory(cfg.Space, cfg.APIKey, "TESTTOOL")
 	r, err := c.List()
 	if err != nil {
 		t.Fatal(err)

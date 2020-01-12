@@ -11,9 +11,8 @@ func TestIssueType_List(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	space, apiKey := cfg.Setup()
 
-	issueType := NewIssueType(space, apiKey, "TESTTOOL")
+	issueType := NewIssueType(cfg.Space, cfg.APIKey, "TESTTOOL")
 	r, err := issueType.List()
 	issueType.PrintCSV(r)
 }
@@ -24,9 +23,8 @@ func TestIssueType_AddDelete(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	space, apiKey := cfg.Setup()
 
-	issueType := NewIssueType(space, apiKey, "TESTTOOL")
+	issueType := NewIssueType(cfg.Space, cfg.APIKey, "TESTTOOL")
 	issueType.Request("name", "テスト")
 	issueType.Request("color", "#e30000")
 	result, err := issueType.Add()
@@ -50,9 +48,8 @@ func TestIssueType_GetID(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	space, apiKey := cfg.Setup()
 
-	issueType := NewIssueType(space, apiKey, "TESTTOOL")
+	issueType := NewIssueType(cfg.Space, cfg.APIKey, "TESTTOOL")
 	id, err := issueType.GetID("タスク")
 	if err != nil {
 		t.Fatal(err)

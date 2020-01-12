@@ -10,9 +10,8 @@ func TestNotification_List(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	space, apiKey := cfg.Setup()
 
-	n := NewNotification(space, apiKey)
+	n := NewNotification(cfg.Space, cfg.APIKey)
 	r, err := n.List()
 	n.PrintCSV(r)
 }

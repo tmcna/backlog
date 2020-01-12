@@ -17,6 +17,7 @@ var debug bool = false
 
 // Cli function parses the command line and then executes application.
 func Cli(args []string) int {
+
 	app := &cli.App{
 		Name:    "backlogcli",
 		Version: Version,
@@ -27,8 +28,7 @@ func Cli(args []string) int {
 				Aliases: []string{"u"},
 				Usage:   "List of users in your space.",
 				Action: func(c *cli.Context) error {
-					s := NewSubcommand()
-					err := s.UserList()
+					err := UserList()
 					if err != nil {
 						return err
 					}
@@ -40,8 +40,7 @@ func Cli(args []string) int {
 				Aliases: []string{"a"},
 				Usage:   "Recent updates in your space.",
 				Action: func(c *cli.Context) error {
-					s := NewSubcommand()
-					err := s.ActivityList()
+					err := ActivityList()
 					if err != nil {
 						return err
 					}
@@ -53,8 +52,7 @@ func Cli(args []string) int {
 				Aliases: []string{"n"},
 				Usage:   "Updates space notification.",
 				Action: func(c *cli.Context) error {
-					s := NewSubcommand()
-					err := s.NotifyList()
+					err := NotifyList()
 					if err != nil {
 						return err
 					}
@@ -66,8 +64,7 @@ func Cli(args []string) int {
 				Aliases: []string{"s"},
 				Usage:   "Information about space disk usage.",
 				Action: func(c *cli.Context) error {
-					s := NewSubcommand()
-					err := s.SpaceUsage()
+					err := SpaceUsage()
 					if err != nil {
 						return err
 					}
@@ -83,8 +80,7 @@ func Cli(args []string) int {
 						Name:  "list",
 						Usage: "List of projects.",
 						Action: func(c *cli.Context) error {
-							s := NewSubcommand()
-							err := s.ProjectList()
+							err := ProjectList()
 							if err != nil {
 								return err
 							}
@@ -95,13 +91,12 @@ func Cli(args []string) int {
 						Name:  "info",
 						Usage: "print information about the project.",
 						Action: func(c *cli.Context) error {
-							s := NewSubcommand()
 							projectKey := c.Args().First()
 							if projectKey == "" {
 								err := fmt.Errorf("Error: Argument not found. %s", "Project key")
 								return err
 							}
-							err := s.ProjectInfo(projectKey)
+							err := ProjectInfo(projectKey)
 							if err != nil {
 								return err
 							}
@@ -119,8 +114,7 @@ func Cli(args []string) int {
 						Name:  "list",
 						Usage: "List of issues.",
 						Action: func(c *cli.Context) error {
-							s := NewSubcommand()
-							err := s.IssueList()
+							err := IssueList()
 							if err != nil {
 								return err
 							}
@@ -131,9 +125,8 @@ func Cli(args []string) int {
 						Name:  "add",
 						Usage: "Add issue.",
 						Action: func(c *cli.Context) error {
-							s := NewSubcommand()
 							file := c.Args().First()
-							err := s.IssueAdd(file)
+							err := IssueAdd(file)
 							if err != nil {
 								return err
 							}
@@ -159,9 +152,8 @@ func Cli(args []string) int {
 							//for i, n := range notifiedUsers {
 							//	fmt.Printf("notify:%d %s\n", i, n)
 							//}
-							s := NewSubcommand()
 							issueKey := c.Args().First()
-							err := s.IssueUpdate(file, status, assignee, comment, issueKey)
+							err := IssueUpdate(file, status, assignee, comment, issueKey)
 							if err != nil {
 								return err
 							}
@@ -172,8 +164,7 @@ func Cli(args []string) int {
 						Name:  "delete",
 						Usage: "Deletes issue.",
 						Action: func(c *cli.Context) error {
-							s := NewSubcommand()
-							err := s.IssueDelete(c.Args().First())
+							err := IssueDelete(c.Args().First())
 							if err != nil {
 								return err
 							}
@@ -191,8 +182,7 @@ func Cli(args []string) int {
 						Name:  "add",
 						Usage: "Add comment.",
 						Action: func(c *cli.Context) error {
-							s := NewSubcommand()
-							err := s.CommentAdd(c.Args().First(), c.Args().Get(1))
+							err := CommentAdd(c.Args().First(), c.Args().Get(1))
 							if err != nil {
 								return err
 							}
