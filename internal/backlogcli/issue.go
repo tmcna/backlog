@@ -11,24 +11,6 @@ import (
 	"github.com/tmcna/backlog/pkg/client"
 )
 
-// UserList function user list subcommand.
-func UserList() error {
-
-	cfg, err := client.NewConfig()
-	if err != nil {
-		err = fmt.Errorf("configuration error, %s", err)
-		return err
-	}
-
-	user := client.NewUser(cfg.Space, cfg.APIKey)
-	r, err := user.List()
-	if err != nil {
-		return err
-	}
-	user.PrintCSV(r)
-	return nil
-}
-
 // IssueList function issue list subcommand.
 func IssueList() error {
 	cfg, err := client.NewConfig()
@@ -282,7 +264,6 @@ func IssueUpdate(optFile string, optStatus string, optAssignee string, optCommen
 		request.Comment(optComment)
 	}
 
-	// Issueオブジェクトを作成し、リクエストパラメーターを設定する。
 	issue := client.NewIssue(cfg.Space, cfg.APIKey)
 	r, err := issue.Update(request, issueKey)
 	if err != nil {
@@ -290,28 +271,6 @@ func IssueUpdate(optFile string, optStatus string, optAssignee string, optCommen
 	}
 
 	fmt.Printf("Update issueKey:%s\n", r.IssueKey)
-
-	return nil
-}
-
-// CommentAdd function comment add subcommand.
-func CommentAdd(issueKey string, content string) error {
-	cfg, err := client.NewConfig()
-	if err != nil {
-		err = fmt.Errorf("configuration error, %s", err)
-		return err
-	}
-
-	// Create request parameters for Backlog API.
-	q := client.NewCommentRequest()
-	q.Content(content)
-
-	// Commentオブジェクトを作成し、リクエストパラメーターを設定する。
-	comment := client.NewComment(cfg.Space, cfg.APIKey, issueKey)
-	_, err = comment.Add(q)
-	if err != nil {
-		return err
-	}
 
 	return nil
 }
@@ -332,87 +291,5 @@ func IssueDelete(issueKey string) error {
 	if err != nil {
 		return err
 	}
-	return nil
-}
-
-// ActivityList function executes act subcommand.
-func ActivityList() error {
-	cfg, err := client.NewConfig()
-	if err != nil {
-		err = fmt.Errorf("configuration error, %s", err)
-		return err
-	}
-
-	act := client.NewActivity(cfg.Space, cfg.APIKey, 32, client.DisplayOrderDesc)
-	for act.HasNext() {
-		r, err := act.List()
-		if err != nil {
-			return err
-		}
-		act.PrintCSV(r)
-	}
-	return nil
-}
-
-// NotifyList function executes notify subcommand.
-func NotifyList() error {
-	cfg, err := client.NewConfig()
-	if err != nil {
-		err = fmt.Errorf("configuration error, %s", err)
-		return err
-	}
-	n := client.NewNotification(cfg.Space, cfg.APIKey)
-	r, err := n.List()
-	if err != nil {
-		return err
-	}
-	n.PrintCSV(r)
-	return nil
-}
-
-// ProjectList function executes project list subcommand.
-func ProjectList() error {
-	cfg, err := client.NewConfig()
-	if err != nil {
-		err = fmt.Errorf("configuration error, %s", err)
-		return err
-	}
-	p := client.NewProjects(cfg.Space, cfg.APIKey)
-	r, err := p.List()
-	if err != nil {
-		return err
-	}
-	p.PrintCSV(r)
-	return nil
-}
-
-// ProjectInfo function executes project info subcommand.
-func ProjectInfo(projectKey string) error {
-	cfg, err := client.NewConfig()
-	if err != nil {
-		err = fmt.Errorf("configuration error, %s", err)
-		return err
-	}
-	p, err := client.NewProject(cfg.Space, cfg.APIKey, projectKey)
-	if err != nil {
-		return err
-	}
-	p.Print()
-	return nil
-}
-
-// SpaceUsage function executes space subcommand.
-func SpaceUsage() error {
-	cfg, err := client.NewConfig()
-	if err != nil {
-		err = fmt.Errorf("configuration error, %s", err)
-		return err
-	}
-	sp := client.NewSpace(cfg.Space, cfg.APIKey)
-	r, err := sp.GetSpaceUsage()
-	if err != nil {
-		return err
-	}
-	sp.PrintSpaceUsageCSV(r)
 	return nil
 }
