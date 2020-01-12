@@ -129,10 +129,10 @@ func (s *Subcommand) IssueAdd(path string) error {
 
 	// Create request parameters for Backlog API.
 	request := client.NewIssueRequest()
-	request.ProjectID(strconv.Itoa(p.GetID()))                       //必須
-	request.Summary(q.Summary)                                       //必須
-	request.IssueTypeID(strconv.Itoa(p.GetIssueTypeID(q.IssueType))) //必須
-	request.PriorityID(strconv.Itoa(p.GetPriorityID(q.Priority)))    //必須
+	request.ProjectID(strconv.Itoa(p.GetID()))                       //required parameter
+	request.Summary(q.Summary)                                       //required parameter
+	request.IssueTypeID(strconv.Itoa(p.GetIssueTypeID(q.IssueType))) //required parameter
+	request.PriorityID(strconv.Itoa(p.GetPriorityID(q.Priority)))    //required parameter
 	request.Description(q.Description)
 	if q.Assignee != "" {
 		request.Assignee(strconv.Itoa(p.GetUserID(q.Assignee)))
@@ -146,7 +146,6 @@ func (s *Subcommand) IssueAdd(path string) error {
 	if q.EstimatedHours != "" {
 		request.EstimatedHours(q.EstimatedHours)
 	}
-	// Issueオブジェクトを作成し、リクエストパラメーターを設定する。
 	issue := client.NewIssue(space, apiKey)
 	r, err := issue.Add(request)
 	if err != nil {
