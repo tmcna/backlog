@@ -231,10 +231,11 @@ func (t *Issue) PrintCSV(r []IssueResponse) {
 
 // PrintIssueCSV function prints information about issue in CSV format.
 func (t *Issue) PrintIssueCSV(r *IssueResponse) {
-	fmt.Printf("%s,%s,%s,%s,%s,%s\n",
+	fmt.Printf("%s,%s,%s,%s,%s,%s,%s\n",
 		r.IssueKey,
 		r.IssueType.Name,
 		r.Summary,
+		r.Description,
 		r.Status.Name,
 		r.Assignee.Name,
 		r.DueDate)

@@ -30,6 +30,30 @@ func IssueList() error {
 	return nil
 }
 
+// IssueInfo function issue information subcommand.
+func IssueInfo(issueKey string) error {
+	cfg, err := client.NewConfig()
+	if err != nil {
+		err = fmt.Errorf("configuration error, %s", err)
+		return err
+	}
+	
+	issue := client.NewIssue(cfg.Space, cfg.APIKey)
+	r, err := issue.Info(issueKey)
+	if err != nil {
+		return err
+	}
+	fmt.Printf("Type     : %s\n", r.IssueType.Name)
+	fmt.Printf("IssueKey : %s\n", r.IssueKey)
+	fmt.Printf("Status   : %s\n", r.Status.Name)
+	fmt.Printf("Assignee : %s\n", r.Assignee.Name)
+	fmt.Printf("Duedate  : %s\n", r.DueDate)
+	fmt.Printf("Summary  : %s\n", r.Summary)
+	fmt.Printf("Description:\n")
+	fmt.Println(r.Description)
+	return nil
+}
+
 // IssueAddRequest structure　for TOML file.
 type IssueAddRequest struct {
 	ProjectKey     string `toml:"projectKey"`

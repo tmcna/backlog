@@ -27,12 +27,19 @@ func Cli(args []string) int {
 				Name:    "user",
 				Aliases: []string{"u"},
 				Usage:   "List of users in your space.",
-				Action: func(c *cli.Context) error {
-					err := UserList()
-					if err != nil {
-						return err
-					}
-					return nil
+				Subcommands: []*cli.Command{
+					{
+						Name:  "list",
+						Aliases: []string{"ls"},
+						Usage: "List of users.",
+						Action: func(c *cli.Context) error {
+								err := UserList()
+								if err != nil {
+									return err
+								}
+								return nil
+							},
+					},
 				},
 			},
 			{
@@ -78,6 +85,7 @@ func Cli(args []string) int {
 				Subcommands: []*cli.Command{
 					{
 						Name:  "list",
+						Aliases: []string{"ls"},
 						Usage: "List of projects.",
 						Action: func(c *cli.Context) error {
 							err := ProjectList()
@@ -112,9 +120,21 @@ func Cli(args []string) int {
 				Subcommands: []*cli.Command{
 					{
 						Name:  "list",
+						Aliases: []string{"ls"},
 						Usage: "List of issues.",
 						Action: func(c *cli.Context) error {
 							err := IssueList()
+							if err != nil {
+								return err
+							}
+							return nil
+						},
+					},
+					{
+						Name:  "info",
+						Usage: "Information of issues.",
+						Action: func(c *cli.Context) error {
+							err := IssueInfo(c.Args().First())
 							if err != nil {
 								return err
 							}
@@ -136,6 +156,7 @@ func Cli(args []string) int {
 					{
 						Name:  "update",
 						Usage: "Update issue.",
+						Aliases: []string{"u"},
 						Flags: []cli.Flag{
 							&cli.StringFlag{Name: "file", Aliases: []string{"f"}},
 							&cli.StringFlag{Name: "status", Aliases: []string{"s"}},
