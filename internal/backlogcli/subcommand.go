@@ -16,7 +16,8 @@ func UserList() error {
 
 	cfg, err := client.NewConfig()
 	if err != nil {
-		return nil
+		err = fmt.Errorf("configuration error, %s", err)
+		return err
 	}
 
 	user := client.NewUser(cfg.Space, cfg.APIKey)
@@ -32,7 +33,8 @@ func UserList() error {
 func IssueList() error {
 	cfg, err := client.NewConfig()
 	if err != nil {
-		return nil
+		err = fmt.Errorf("configuration error, %s", err)
+		return err
 	}
 	
 	issue := client.NewIssue(cfg.Space, cfg.APIKey)
@@ -61,6 +63,12 @@ type IssueAddRequest struct {
 
 // IssueAdd function issue add subcommand.
 func IssueAdd(path string) error {
+
+	cfg, err := client.NewConfig()
+	if err != nil {
+		err = fmt.Errorf("configuration error, %s", err)
+		return err
+	}
 
 	e := filepath.Ext(path)
 
@@ -107,11 +115,6 @@ func IssueAdd(path string) error {
 	}
 	if q.Priority == "" {
 		return fmt.Errorf("Error:none required parameter %s", "proprity")
-	}
-
-	cfg, err := client.NewConfig()
-	if err != nil {
-		return err
 	}
 
 	sp := client.NewSpace(cfg.Space, cfg.APIKey)
@@ -170,6 +173,12 @@ func IssueUpdate(optFile string, optStatus string, optAssignee string, optCommen
 
 	var q IssueUpdateRequest
 
+	cfg, err := client.NewConfig()
+	if err != nil {
+		err = fmt.Errorf("configuration error, %s", err)
+		return err
+	}
+
 	if optFile != "" {
 		e := filepath.Ext(optFile)
 
@@ -202,11 +211,6 @@ func IssueUpdate(optFile string, optStatus string, optAssignee string, optCommen
 			err := fmt.Errorf("file type error.file=%s", optFile)
 			return err
 		}
-	}
-
-	cfg, err := client.NewConfig()
-	if err != nil {
-		return err
 	}
 
 	i2 := client.NewIssue(cfg.Space, cfg.APIKey)
@@ -294,6 +298,7 @@ func IssueUpdate(optFile string, optStatus string, optAssignee string, optCommen
 func CommentAdd(issueKey string, content string) error {
 	cfg, err := client.NewConfig()
 	if err != nil {
+		err = fmt.Errorf("configuration error, %s", err)
 		return err
 	}
 
@@ -315,6 +320,7 @@ func CommentAdd(issueKey string, content string) error {
 func IssueDelete(issueKey string) error {
 	cfg, err := client.NewConfig()
 	if err != nil {
+		err = fmt.Errorf("configuration error, %s", err)
 		return nil
 	}
 	
@@ -333,7 +339,8 @@ func IssueDelete(issueKey string) error {
 func ActivityList() error {
 	cfg, err := client.NewConfig()
 	if err != nil {
-		return nil
+		err = fmt.Errorf("configuration error, %s", err)
+		return err
 	}
 
 	act := client.NewActivity(cfg.Space, cfg.APIKey, 32, client.DisplayOrderDesc)
@@ -351,7 +358,8 @@ func ActivityList() error {
 func NotifyList() error {
 	cfg, err := client.NewConfig()
 	if err != nil {
-		return nil
+		err = fmt.Errorf("configuration error, %s", err)
+		return err
 	}
 	n := client.NewNotification(cfg.Space, cfg.APIKey)
 	r, err := n.List()
@@ -366,7 +374,8 @@ func NotifyList() error {
 func ProjectList() error {
 	cfg, err := client.NewConfig()
 	if err != nil {
-		return nil
+		err = fmt.Errorf("configuration error, %s", err)
+		return err
 	}
 	p := client.NewProjects(cfg.Space, cfg.APIKey)
 	r, err := p.List()
@@ -381,7 +390,8 @@ func ProjectList() error {
 func ProjectInfo(projectKey string) error {
 	cfg, err := client.NewConfig()
 	if err != nil {
-		return nil
+		err = fmt.Errorf("configuration error, %s", err)
+		return err
 	}
 	p, err := client.NewProject(cfg.Space, cfg.APIKey, projectKey)
 	if err != nil {
@@ -395,7 +405,8 @@ func ProjectInfo(projectKey string) error {
 func SpaceUsage() error {
 	cfg, err := client.NewConfig()
 	if err != nil {
-		return nil
+		err = fmt.Errorf("configuration error, %s", err)
+		return err
 	}
 	sp := client.NewSpace(cfg.Space, cfg.APIKey)
 	r, err := sp.GetSpaceUsage()

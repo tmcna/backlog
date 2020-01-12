@@ -3,6 +3,7 @@ package client
 import (
 	"io/ioutil"
 	"os"
+	"fmt"
 )
 
 // Config is ...
@@ -17,6 +18,10 @@ func NewConfig() (*Config, error) {
 	var err error
 	cfg := new(Config)
 	path := os.Getenv("BACKLOG_CLI")
+	if path == "" {
+		err := fmt.Errorf("Environment variable not specified. %s", "BACKLOG_CLI")
+		return nil, err
+	}
 	cfg.Space, err = cfg.readfile(path + "/space.txt")
 	if err != nil {
 		return nil, err
