@@ -118,7 +118,7 @@ func (t *Comment) Delete(id int) (*CommentResponse, error) {
 
 // PrintCSV function prints list of comments in CSV format.
 func (t *Comment) PrintCSV(r []CommentResponse) {
-	for i := 0; i < len(r); i++ {
-		fmt.Printf("%d,%s\n", r[i].ID, r[i].Content)
+	for _, n := range r {
+		fmt.Printf("%d,%s\n", n.ID, n.Content)
 	}
 }

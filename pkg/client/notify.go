@@ -40,10 +40,10 @@ func (n *Notification) List() ([]NotificationResponse, error) {
 
 // PrintCSV function prints list of notification in CSV format.
 func (n *Notification) PrintCSV(r []NotificationResponse) {
-	for i := 0; i < len(r); i++ {
+	for _, n := range r {
 		fmt.Printf("%d,%s,%s\n",
-			r[i].ID,
-			r[i].Issue.IssueKey,
-			r[i].Issue.Summary)
+			n.ID,
+			n.Issue.IssueKey,
+			n.Issue.Summary)
 	}
 }

@@ -101,13 +101,13 @@ func (act *Activity) HasNext() bool {
 
 // PrintCSV prints list of activities in CSV format.
 func (act *Activity) PrintCSV(r []ActivityResponse) {
-	for i := 0; i < len(r); i++ {
+	for _, n := range r  {
 		fmt.Printf("%d,%s,%s,%s,%d,%d\n",
-			r[i].ID,
-			r[i].Project.ProjectKey,
-			r[i].Project.Name,
-			r[i].User.Name,
-			r[i].Type,
-			r[i].Reason)
+			n.ID,
+			n.Project.ProjectKey,
+			n.Project.Name,
+			n.User.Name,
+			n.Type,
+			n.Reason)
 	}
 }

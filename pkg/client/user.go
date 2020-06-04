@@ -63,7 +63,7 @@ func (u *User) ListOfProject(projectKey string) ([]UserResponse, error) {
 
 // PrintCSV function prints list of users in CSV format.
 func (u *User) PrintCSV(r []UserResponse) {
-	for i := 0; i < len(r); i++ {
-		fmt.Printf("%d,%s,%s,%d,%s,%s\n", r[i].ID, r[i].UserID, r[i].Name, r[i].RoleType, r[i].Lang, r[i].MailAddress)
+	for _, n := range r {
+		fmt.Printf("%d,%s,%s,%d,%s,%s\n", n.ID, n.UserID, n.Name, n.RoleType, n.Lang, n.MailAddress)
 	}
 }

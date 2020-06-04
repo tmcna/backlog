@@ -116,7 +116,7 @@ func (t *IssueType) GetID(name string) (int, error) {
 
 // PrintCSV function prints list of Issue Type in CSV format.
 func (t *IssueType) PrintCSV(r []IssueTypeResponse) {
-	for i := 0; i < len(r); i++ {
-		fmt.Printf("%d,%s\n", r[i].ID, r[i].Name)
+	for _, n := range r {
+		fmt.Printf("%d,%s\n", n.ID, n.Name)
 	}
 }

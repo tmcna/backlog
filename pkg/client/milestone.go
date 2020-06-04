@@ -115,14 +115,14 @@ func (m *Milestone) GetID(projectKey string, name string) (int, error) {
 
 // PrintCSV function prints list of Milestones in CSV format.
 func (m *Milestone) PrintCSV(r []MilestoneResponse) {
-	for i := 0; i < len(r); i++ {
+	for _, n := range r {
 		fmt.Printf("%d,%d,%s,%s,%s,%s,%d\n",
-			r[i].ID,
-			r[i].ProjectID,
-			r[i].Name,
-			r[i].Description,
-			r[i].StartDate,
-			r[i].ReleaseDueDate,
-			r[i].DisplayOrder)
+			n.ID,
+			n.ProjectID,
+			n.Name,
+			n.Description,
+			n.StartDate,
+			n.ReleaseDueDate,
+			n.DisplayOrder)
 	}
 }

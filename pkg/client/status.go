@@ -116,7 +116,7 @@ func (t *Status) GetID(name string) (int, error) {
 
 // PrintCSV function prints list of statuses in CSV format.
 func (t *Status) PrintCSV(r []StatusResponse) {
-	for i := 0; i < len(r); i++ {
-		fmt.Printf("%d,%s\n", r[i].ID, r[i].Name)
+	for _, n := range r {
+		fmt.Printf("%d,%s\n", n.ID, n.Name)
 	}
 }
