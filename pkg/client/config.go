@@ -4,6 +4,7 @@ import (
 	"io/ioutil"
 	"os"
 	"fmt"
+	"path/filepath"
 )
 
 // Config is ...
@@ -22,11 +23,11 @@ func NewConfig() (*Config, error) {
 		err := fmt.Errorf("Environment variable not specified. %s", "BACKLOG_CLI")
 		return nil, err
 	}
-	cfg.Space, err = cfg.readfile(path + "/space.txt")
+	cfg.Space, err = cfg.readfile(filepath.Join(path, "space.txt"))
 	if err != nil {
 		return nil, err
 	}
-	cfg.APIKey, err = cfg.readfile(path + "/apikey.txt")
+	cfg.APIKey, err = cfg.readfile(filepath.Join(path, "apikey.txt"))
 	if err != nil {
 		return nil, err
 	}
