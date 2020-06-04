@@ -42,5 +42,8 @@ func (cfg *Config) readfile(path string) (string, error) {
 	}
 	defer f.Close()
 	b, err := ioutil.ReadAll(f)
+	if err != nil {
+		return "", err
+	}
 	return string(b), nil
 }
