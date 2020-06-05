@@ -42,8 +42,7 @@ func (c *Category) List() ([]CategoryResponse, error) {
 	}
 
 	var r []CategoryResponse
-	err = json.Unmarshal(body, &r)
-	if err != nil {
+	if err = json.Unmarshal(body, &r); err != nil {
 		return nil, err
 	}
 
@@ -60,8 +59,7 @@ func (c *Category) Add() (*CategoryResponse, error) {
 		return nil, err
 	}
 	var r CategoryResponse
-	err = json.Unmarshal(body, &r)
-	if err != nil {
+	if err = json.Unmarshal(body, &r); err != nil {
 		return nil, err
 	}
 
@@ -80,8 +78,7 @@ func (c *Category) Delete(id int) (*CategoryResponse, error) {
 	}
 
 	var r CategoryResponse
-	err = json.Unmarshal(body, &r)
-	if err != nil {
+	if err = json.Unmarshal(body, &r); err != nil {
 		return nil, err
 	}
 
@@ -98,8 +95,7 @@ func (c *Category) GetID(name string) (int, error) {
 	}
 
 	var r []CategoryResponse
-	err = json.Unmarshal(body, &r)
-	if err != nil {
+	if err = json.Unmarshal(body, &r); err != nil {
 		return -1, err
 	}
 

@@ -42,8 +42,7 @@ func (t *Status) List() ([]StatusResponse, error) {
 	}
 
 	var r []StatusResponse
-	err = json.Unmarshal(body, &r)
-	if err != nil {
+	if err = json.Unmarshal(body, &r); err != nil {
 		return nil, err
 	}
 
@@ -60,8 +59,7 @@ func (t *Status) Add() (*StatusResponse, error) {
 		return nil, err
 	}
 	var r StatusResponse
-	err = json.Unmarshal(body, &r)
-	if err != nil {
+	if err = json.Unmarshal(body, &r); err != nil {
 		return nil, err
 	}
 
@@ -81,8 +79,7 @@ func (t *Status) Delete(statusID int, substituteStatusID int) (*StatusResponse, 
 	}
 
 	var r StatusResponse
-	err = json.Unmarshal(body, &r)
-	if err != nil {
+	if err = json.Unmarshal(body, &r); err != nil {
 		return nil, err
 	}
 
@@ -100,8 +97,7 @@ func (t *Status) GetID(name string) (int, error) {
 	}
 
 	var r []StatusResponse
-	err = json.Unmarshal(body, &r)
-	if err != nil {
+	if err = json.Unmarshal(body, &r); err != nil {
 		return -1, err
 	}
 

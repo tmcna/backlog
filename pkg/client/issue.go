@@ -164,8 +164,7 @@ func (t *Issue) Add(q *IssueRequest) (*IssueResponse, error) {
 	}
 	// defer
 	var r IssueResponse
-	err = json.Unmarshal(body, &r)
-	if err != nil {
+	if err = json.Unmarshal(body, &r); err != nil {
 		return nil, err
 	}
 
@@ -183,8 +182,7 @@ func (t *Issue) Update(q *IssueRequest, issueKey string) (*IssueResponse, error)
 	}
 	// defer
 	var r IssueResponse
-	err = json.Unmarshal(body, &r)
-	if err != nil {
+	if err = json.Unmarshal(body, &r); err != nil {
 		return nil, err
 	}
 
@@ -208,8 +206,7 @@ func (t *Issue) Delete(issueKey string) (*IssueResponse, error) {
 	}
 
 	var r IssueResponse
-	err = json.Unmarshal(body, &r)
-	if err != nil {
+	if err = json.Unmarshal(body, &r); err != nil {
 		return nil, err
 	}
 

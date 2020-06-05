@@ -71,8 +71,7 @@ func (act *Activity) List() ([]ActivityResponse, error) {
 	//fmt.Println(string(body))
 
 	var r []ActivityResponse
-	err = json.Unmarshal(body, &r)
-	if err != nil {
+	if err = json.Unmarshal(body, &r); err != nil {
 		return nil, err
 	}
 

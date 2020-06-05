@@ -31,8 +31,7 @@ func (p *Space) GetSpaceUsage() (*SpaceUsageResponse, error) {
 	}
 
 	var r SpaceUsageResponse
-	err = json.Unmarshal(body, &r)
-	if err != nil {
+	if err = json.Unmarshal(body, &r); err != nil {
 		return nil, err
 	}
 

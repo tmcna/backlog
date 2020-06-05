@@ -33,8 +33,7 @@ func Cli(args []string) int {
 						Aliases: []string{"ls"},
 						Usage: "List of users.",
 						Action: func(c *cli.Context) error {
-								err := UserList()
-								if err != nil {
+								if err := UserList(); err != nil {
 									return err
 								}
 								return nil
@@ -47,8 +46,7 @@ func Cli(args []string) int {
 				Aliases: []string{"a"},
 				Usage:   "Recent updates in your space.",
 				Action: func(c *cli.Context) error {
-					err := ActivityList()
-					if err != nil {
+					if err := ActivityList(); err != nil {
 						return err
 					}
 					return nil
@@ -59,8 +57,7 @@ func Cli(args []string) int {
 				Aliases: []string{"n"},
 				Usage:   "Updates space notification.",
 				Action: func(c *cli.Context) error {
-					err := NotifyList()
-					if err != nil {
+					if err := NotifyList(); err != nil {
 						return err
 					}
 					return nil
@@ -71,8 +68,7 @@ func Cli(args []string) int {
 				Aliases: []string{"s"},
 				Usage:   "Information about space disk usage.",
 				Action: func(c *cli.Context) error {
-					err := SpaceUsage()
-					if err != nil {
+					if err := SpaceUsage(); err != nil {
 						return err
 					}
 					return nil
@@ -88,8 +84,7 @@ func Cli(args []string) int {
 						Aliases: []string{"ls"},
 						Usage: "List of projects.",
 						Action: func(c *cli.Context) error {
-							err := ProjectList()
-							if err != nil {
+							if err := ProjectList(); err != nil {
 								return err
 							}
 							return nil
@@ -104,8 +99,7 @@ func Cli(args []string) int {
 								err := fmt.Errorf("Error: Argument not found. %s", "Project key")
 								return err
 							}
-							err := ProjectInfo(projectKey)
-							if err != nil {
+							if err := ProjectInfo(projectKey); err != nil {
 								return err
 							}
 							return nil
@@ -123,8 +117,7 @@ func Cli(args []string) int {
 						Aliases: []string{"ls"},
 						Usage: "List of issues.",
 						Action: func(c *cli.Context) error {
-							err := IssueList()
-							if err != nil {
+							if err := IssueList(); err != nil {
 								return err
 							}
 							return nil
@@ -134,8 +127,7 @@ func Cli(args []string) int {
 						Name:  "info",
 						Usage: "Information of issues.",
 						Action: func(c *cli.Context) error {
-							err := IssueInfo(c.Args().First())
-							if err != nil {
+							if err := IssueInfo(c.Args().First()); err != nil {
 								return err
 							}
 							return nil
@@ -146,8 +138,7 @@ func Cli(args []string) int {
 						Usage: "Add issue.",
 						Action: func(c *cli.Context) error {
 							file := c.Args().First()
-							err := IssueAdd(file)
-							if err != nil {
+							if err := IssueAdd(file); err != nil {
 								return err
 							}
 							return nil
@@ -185,8 +176,7 @@ func Cli(args []string) int {
 						Name:  "delete",
 						Usage: "Deletes issue.",
 						Action: func(c *cli.Context) error {
-							err := IssueDelete(c.Args().First())
-							if err != nil {
+							if err := IssueDelete(c.Args().First()); err != nil {
 								return err
 							}
 							return nil
@@ -203,8 +193,7 @@ func Cli(args []string) int {
 						Name:  "add",
 						Usage: "Add comment.",
 						Action: func(c *cli.Context) error {
-							err := CommentAdd(c.Args().First(), c.Args().Get(1))
-							if err != nil {
+							if err := CommentAdd(c.Args().First(), c.Args().Get(1)); err != nil {
 								return err
 							}
 							return nil
@@ -215,8 +204,7 @@ func Cli(args []string) int {
 		},
 	}
 
-	err := app.Run(os.Args)
-	if err != nil {
+	if err := app.Run(os.Args); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		return ExitCodeError
 	}

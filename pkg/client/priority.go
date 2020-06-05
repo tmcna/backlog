@@ -30,8 +30,7 @@ func (c *Priority) List() ([]PriorityResponse, error) {
 	}
 
 	var r []PriorityResponse
-	err = json.Unmarshal(body, &r)
-	if err != nil {
+	if err = json.Unmarshal(body, &r); err != nil {
 		return nil, err
 	}
 
@@ -48,8 +47,7 @@ func (c *Priority) GetID(name string) (int, error) {
 	}
 
 	var r []PriorityResponse
-	err = json.Unmarshal(body, &r)
-	if err != nil {
+	if err = json.Unmarshal(body, &r); err != nil {
 		return -1, err
 	}
 

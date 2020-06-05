@@ -45,8 +45,7 @@ func (p *Projects) List() ([]ProjectResponse, error) {
 	}
 
 	var r []ProjectResponse
-	err = json.Unmarshal(body, &r)
-	if err != nil {
+	if err = json.Unmarshal(body, &r); err != nil {
 		return nil, err
 	}
 
@@ -85,8 +84,7 @@ func (p *Project) Info() (*ProjectResponse, error) {
 	}
 
 	var r ProjectResponse
-	err = json.Unmarshal(body, &r)
-	if err != nil {
+	if err = json.Unmarshal(body, &r); err != nil {
 		return nil, err
 	}
 

@@ -30,8 +30,7 @@ func (n *Notification) List() ([]NotificationResponse, error) {
 	}
 
 	var r []NotificationResponse
-	err = json.Unmarshal(body, &r)
-	if err != nil {
+	if err = json.Unmarshal(body, &r); err != nil {
 		return nil, err
 	}
 

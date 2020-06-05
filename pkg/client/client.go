@@ -57,8 +57,7 @@ func (cli *Client) Get(api string, values url.Values) ([]byte, error) {
 			return nil, err
 		}
 		var r ErrorResponse
-		err = json.Unmarshal(body, &r)
-		if err != nil {
+		if err = json.Unmarshal(body, &r); err != nil {
 			return nil, err
 		}
 		err = fmt.Errorf("Error: StatusCode:%d Code:%d Message: %s MoreInfo:%s",
@@ -107,8 +106,7 @@ func (cli *Client) Post(api string, values url.Values) ([]byte, error) {
 			return nil, err
 		}
 		var r ErrorResponse
-		err = json.Unmarshal(body, &r)
-		if err != nil {
+		if err = json.Unmarshal(body, &r); err != nil {
 			return nil, err
 		}
 		err = fmt.Errorf("Error: StatusCode:%d Code:%d Message: %s MoreInfo:%s",
@@ -156,8 +154,7 @@ func (cli *Client) Patch(api string, values url.Values) ([]byte, error) {
 			return nil, err
 		}
 		var r ErrorResponse
-		err = json.Unmarshal(body, &r)
-		if err != nil {
+		if err = json.Unmarshal(body, &r); err != nil {
 			return nil, err
 		}
 		err = fmt.Errorf("Error: StatusCode:%d Code:%d Message: %s MoreInfo:%s",
@@ -205,8 +202,7 @@ func (cli *Client) Delete(api string, request url.Values) ([]byte, error) {
 			return nil, err
 		}
 		var r ErrorResponse
-		err = json.Unmarshal(body, &r)
-		if err != nil {
+		if err = json.Unmarshal(body, &r); err != nil {
 			return nil, err
 		}
 		err = fmt.Errorf("Error: StatusCode:%d Code:%d Message: %s MoreInfo:%s",

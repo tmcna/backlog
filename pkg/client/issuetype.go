@@ -42,8 +42,7 @@ func (t *IssueType) List() ([]IssueTypeResponse, error) {
 	}
 
 	var r []IssueTypeResponse
-	err = json.Unmarshal(body, &r)
-	if err != nil {
+	if err = json.Unmarshal(body, &r); err != nil {
 		return nil, err
 	}
 
@@ -60,8 +59,7 @@ func (t *IssueType) Add() (*IssueTypeResponse, error) {
 		return nil, err
 	}
 	var r IssueTypeResponse
-	err = json.Unmarshal(body, &r)
-	if err != nil {
+	if err = json.Unmarshal(body, &r); err != nil {
 		return nil, err
 	}
 
@@ -81,8 +79,7 @@ func (t *IssueType) Delete(issueTypeID int, substituteIssueTypeID int) (*IssueTy
 	}
 
 	var r IssueTypeResponse
-	err = json.Unmarshal(body, &r)
-	if err != nil {
+	if err = json.Unmarshal(body, &r); err != nil {
 		return nil, err
 	}
 
@@ -100,8 +97,7 @@ func (t *IssueType) GetID(name string) (int, error) {
 	}
 
 	var r []IssueTypeResponse
-	err = json.Unmarshal(body, &r)
-	if err != nil {
+	if err = json.Unmarshal(body, &r); err != nil {
 		return -1, err
 	}
 

@@ -52,8 +52,7 @@ func (t *Comment) Add(q *CommentRequest) (*CommentResponse, error) {
 	}
 
 	var r CommentResponse
-	err = json.Unmarshal(body, &r)
-	if err != nil {
+	if err = json.Unmarshal(body, &r); err != nil {
 		return nil, err
 	}
 
@@ -69,8 +68,7 @@ func (t *Comment) Update(id string, q *CommentRequest) (*CommentResponse, error)
 		return nil, err
 	}
 	var r CommentResponse
-	err = json.Unmarshal(body, &r)
-	if err != nil {
+	if err = json.Unmarshal(body, &r); err != nil {
 		return nil, err
 	}
 
@@ -88,8 +86,7 @@ func (t *Comment) List() ([]CommentResponse, error) {
 	}
 
 	var r []CommentResponse
-	err = json.Unmarshal(body, &r)
-	if err != nil {
+	if err = json.Unmarshal(body, &r); err != nil {
 		return nil, err
 	}
 
@@ -108,8 +105,7 @@ func (t *Comment) Delete(id int) (*CommentResponse, error) {
 	}
 
 	var r CommentResponse
-	err = json.Unmarshal(body, &r)
-	if err != nil {
+	if err = json.Unmarshal(body, &r); err != nil {
 		return nil, err
 	}
 

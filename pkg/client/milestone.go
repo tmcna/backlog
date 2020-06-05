@@ -42,8 +42,7 @@ func (m *Milestone) List() ([]MilestoneResponse, error) {
 	}
 
 	var r []MilestoneResponse
-	err = json.Unmarshal(body, &r)
-	if err != nil {
+	if err = json.Unmarshal(body, &r); err != nil {
 		return nil, err
 	}
 
@@ -61,8 +60,7 @@ func (m *Milestone) Add() (*MilestoneResponse, error) {
 	}
 
 	var r MilestoneResponse
-	err = json.Unmarshal(body, &r)
-	if err != nil {
+	if err = json.Unmarshal(body, &r); err != nil {
 		return nil, err
 	}
 
@@ -80,8 +78,7 @@ func (m *Milestone) Delete(id int) (*MilestoneResponse, error) {
 	}
 
 	var r MilestoneResponse
-	err = json.Unmarshal(body, &r)
-	if err != nil {
+	if err = json.Unmarshal(body, &r); err != nil {
 		return nil, err
 	}
 
@@ -99,8 +96,7 @@ func (m *Milestone) GetID(projectKey string, name string) (int, error) {
 	}
 
 	var r []MilestoneResponse
-	err = json.Unmarshal(body, &r)
-	if err != nil {
+	if err = json.Unmarshal(body, &r); err != nil {
 		return -1, err
 	}
 
