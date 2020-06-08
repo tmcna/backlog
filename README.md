@@ -1,5 +1,30 @@
 # BacklogCLI
 
+BacklogCLI ia a CLI application for Backlog users.
+
+# Installation
+  
+```
+$ git clone https://github.com/tmcna/backlog
+$ cd backlog 
+$ cd cmd/backlogcli/
+$ go build
+
+```
+
+# Setup
+
+```
+$ mkdir ~/.backlogcli
+$ export BACKLOG_CLI=~~/.backlogcli
+$ cd $BACKLOG_CLI
+$ echo "API_KEY" > apikey.txt
+$ echo "https://space-name.backlog.com" > space.txt
+```
+
+
+# Usage
+```
 NAME:
    backlogcli - A CLI application for Backlog users.
 
@@ -22,3 +47,10 @@ COMMANDS:
 GLOBAL OPTIONS:
    --help, -h     show help (default: false)  
    --version, -v  print the version (default: false)  
+```
+
+# Author
+Kazuhiro Kawachi
+
+# License
+MIT License
