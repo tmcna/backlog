@@ -1,6 +1,6 @@
 # BacklogCLI
 
-BacklogCLI ia a CLI application for Backlog users.
+BacklogCLI is a CLI application for Backlog users.
 
 # Installation
   
